@@ -21,13 +21,13 @@
             if (user) {
                 console.log(`Имя пользователя: ${user.first_name}`);
                   if (unityInstance) {
-                  unityInstance.SendMessage('TGAPIManager', 'SetUserName', user ? user.first_name : "Гость");
+                  unityInstance.SendMessage('TGAPIManager', 'SetUserName', user.first_name);
                 }
             }
             else
             {
                if (unityInstance) {
-                  unityInstance.SendMessage('TGAPIManager', 'SetUserName', user ? "udentified" : "Гость");
+                  unityInstance.SendMessage('TGAPIManager', 'SetUserName', "udentified");
             }
     </script>
 
@@ -79,7 +79,7 @@
         updateBannerVisibility();
       }
 
-      var version = "1.0.5"; 
+      var version = "1.0.6"; 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
       var config = {
