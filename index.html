@@ -9,30 +9,23 @@
 
   
     //v5
-    <script src="https://telegram.org/js/telegram-web-app.js">
-        document.addEventListener("DOMContentLoaded", function () {
-        // Проверка наличия Telegram WebApp API
-        if (window.Telegram && window.Telegram.WebApp) {
-            // Получение информации о пользователе из initDataUnsafe
-            const user = window.Telegram.WebApp.initDataUnsafe.user;
+    
+
+   
+</head>
+  <body>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script type="text/javascript">
+       const user = window.Telegram.WebApp.initDataUnsafe.user;
             
             if (user) {
                 console.log(`Имя пользователя: ${user.first_name}`);
                   if (unityInstance) {
                 unityInstance.SendMessage('TGAPIManager', 'SetUserName', user ? user.first_name : "Гость");
             }
-            } else {
-                console.warn("Данные о пользователе отсутствуют.");
             }
-        } else {
-            console.error("Telegram Web App API недоступен.");
-        }
-    });  
-</script>
+    </script>
 
-   
-</head>
-  <body>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
