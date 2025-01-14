@@ -7,9 +7,10 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
 
-    //init tg weapp api
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
+  
+    
+    <script src="https://telegram.org/js/telegram-web-app.js">
+      console.log(window.Telegram);
     function initializeTelegramAPI(retries = 5, delay = 2000) {
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.init();
@@ -86,7 +87,7 @@
         updateBannerVisibility();
       }
 
-      var version = "1.0.2"; 
+      var version = "1.0.3"; 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
       var config = {
