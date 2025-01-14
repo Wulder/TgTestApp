@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     
-    //v3
+    //v2
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Проверка, что приложение запущено внутри Telegram
@@ -79,16 +79,17 @@
         updateBannerVisibility();
       }
 
+      var version = "1.0.1"; 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
       var config = {
-        dataUrl: buildUrl + "/WebGL.data",
-        frameworkUrl: buildUrl + "/WebGL.framework.js",
-        codeUrl: buildUrl + "/WebGL.wasm",
+        dataUrl: buildUrl + "/WebGL.data?v="+version,
+        frameworkUrl: buildUrl + "/WebGL.framework.js?v="+version,
+        codeUrl: buildUrl + "/WebGL.wasm?v="+version,
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "TGTestApp",
-        productVersion: "0.1",
+        productVersion: version,
         showBanner: unityShowBanner,
       };
 
