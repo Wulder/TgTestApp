@@ -6,6 +6,20 @@
     <title>Unity WebGL Player | TGTestApp</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+
+    <script>
+    // Инициализация Telegram Web App
+    window.Telegram.WebApp.init();
+
+    // Получение информации о пользователе
+    const user = window.Telegram.WebApp.initDataUnsafe.user;
+    console.log(`User: ${user.first_name}`);
+
+    // Передача данных в Unity через метод SendMessage
+    if (unityInstance) {
+        unityInstance.SendMessage('TGAPIManager', 'SetUserName', user.first_name);
+    }
+</script>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
