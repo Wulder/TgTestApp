@@ -9,18 +9,26 @@
     
     //v2
     <script>
-    // Инициализация Telegram Web App
-    window.Telegram.WebApp.init();
+    document.addEventListener("DOMContentLoaded", function () {
+        // Проверка, что приложение запущено внутри Telegram
+        if (window.Telegram && window.Telegram.WebApp) {
+            // Инициализация Telegram Web App API
+            window.Telegram.WebApp.init();
 
-    // Получение информации о пользователе
-    const user = window.Telegram.WebApp.initDataUnsafe.user;
-    console.log(`User: ${user.first_name}`);
+            // Получение информации о пользователе
+            const user = window.Telegram.WebApp.initDataUnsafe.user;
+            console.log(`Привет, ${user ? user.first_name : "Гость"}!`);
 
-    // Передача данных в Unity через метод SendMessage
-    if (unityInstance) {
-        unityInstance.SendMessage('TGAPIManager', 'SetUserName', user.first_name);
-    }
+            // Отправка данных в Unity
+            if (unityInstance) {
+                unityInstance.SendMessage('TGAPIManager', 'SetUserName', user ? user.first_name : "Гость");
+            }
+        } else {
+            console.warn("Приложение запущено вне Telegram. API недоступно.");
+        }
+    });
 </script>
+   
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
