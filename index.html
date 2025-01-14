@@ -12,6 +12,7 @@
     
  <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script type="text/javascript">
+      function SetTgName(){
        const user = window.Telegram.WebApp.initDataUnsafe.user;
             
             if (user) {
@@ -26,6 +27,7 @@
                   unityInstance.SendMessage('TGAPIManager', 'SetUserName', "udentified");
                 }
             }
+      }
     </script>
    
 </head>
