@@ -7,15 +7,12 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     
-    //v2
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Проверка, что приложение запущено внутри Telegram
+    function initializeTelegramAPI(retries = 5, delay = 500) {
         if (window.Telegram && window.Telegram.WebApp) {
-            // Инициализация Telegram Web App API
             window.Telegram.WebApp.init();
+            console.log("Telegram Web App API доступен.");
 
-            // Получение информации о пользователе
             const user = window.Telegram.WebApp.initDataUnsafe.user;
             console.log(`Привет, ${user ? user.first_name : "Гость"}!`);
 
@@ -23,13 +20,21 @@
             if (unityInstance) {
                 unityInstance.SendMessage('TGAPIManager', 'SetUserName', user ? user.first_name : "Гость");
             }
+        } else if (retries > 0) {
+            console.warn(`Telegram API недоступен. Повторная попытка через ${delay} мс...`);
+            setTimeout(() => initializeTelegramAPI(retries - 1, delay), delay);
         } else {
-            console.warn("Приложение запущено вне Telegram. API недоступно.");
+            console.error("Telegram API недоступен после нескольких попыток.");
         }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        initializeTelegramAPI();
     });
 </script>
+  
    
-  </head>
+</head>
   <body>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
@@ -79,7 +84,7 @@
         updateBannerVisibility();
       }
 
-      var version = "1.0.1"; 
+      var version = "1.0.2"; 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGL.loader.js";
       var config = {
